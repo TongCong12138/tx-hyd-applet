@@ -1,0 +1,67 @@
+<!--pages/home/home.wxml-->
+
+<!-- 导航栏 -->
+<view class="custom-nav" style="padding-top: {{statusBarHeight}}px;">
+  <view class="nav-bg"></view>
+  <view class="nav-content" bindtap="goToAddress">
+    <image src="/assets/icons/address.svg" class="icon"/>
+    <text class="nav-text">星遇光年府</text>
+  </view>
+</view>
+
+<!-- 轮播图 -->
+<swiper class="banner" style="margin-top: {{navTotalHeight + 15}}px;" indicator-dots="true" autoplay="true" interval="3000" duration="500">
+  <swiper-item wx:for="{{bannerList}}" wx:key="index">
+    <image src="{{item.imageUrl}}" mode="aspectFill" class="banner-image"/>
+  </swiper-item>
+</swiper>
+
+<!-- 功能按钮区域 -->
+<view class="feature-buttons">
+  <view class="feature-item" bindtap="goToWaterTicket">
+    <image src="/assets/icons/ticket-sharp.svg" class="feature-icon"/>
+    <text class="feature-text">水票购买</text>
+  </view>
+  <view style="width:16px;"/>
+  <view class="feature-item" bindtap="goToInvite">
+    <image src="/assets/icons/invite.svg" class="feature-icon"/>
+    <text class="feature-text">邀请有礼</text>
+  </view>
+</view>
+
+<!-- 热销产品区域 -->
+<view class="hot-products">
+  <view class="section-header {{isHeaderFixed ? 'fixed' : ''}}">
+    <text class="section-title">热销产品</text>
+    <view class="search-entry" bindtap="goToSearch">
+      <image src="/assets/icons/search.svg" class="search-icon"/>
+      <text class="search-text">搜索商品</text>
+    </view>
+  </view>
+  <view class="product-list">
+    <view class="product-item" wx:for="{{hotProducts}}" wx:key="id" bindtap="goToProductDetail" data-id="{{item.id}}">
+      <image src="{{item.imageUrl}}" mode="aspectFill" class="product-image"/>
+      <view class="product-info">
+        <text class="product-name">{{item.name}}</text>
+        <view class="product-middle">
+          <view class="price-container">
+            <text class="product-price">¥{{item.price}}</text>
+            <text class="original-price">¥{{item.originalPrice}}</text>
+          </view>
+          <view class="quantity-control">
+            <view class="quantity-btn" catchtap="decreaseQuantity" data-id="{{item.id}}">-</view>
+            <text class="quantity-number">{{item.quantity || 0}}</text>
+            <view class="quantity-btn" catchtap="increaseQuantity" data-id="{{item.id}}">+</view>
+          </view>
+        </view>
+        <view class="product-bottom">
+          <view class="action-buttons">
+            <view class="action-btn" catchtap="addToCart" data-id="{{item.id}}">加入购物车</view>
+            <view class="action-btn primary" catchtap="buyNow" data-id="{{item.id}}">立即下单</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+

@@ -1,0 +1,12 @@
+<view class="container">
+  <view class="search-box">
+    <input class="search-input" placeholder="请输入地址关键词" bindinput="onSearchInput" value="{{keyword}}" />
+  </view>
+
+  <view class="search-result">
+    <view class="result-item" wx:for="{{searchResults}}" wx:key="id" bindtap="selectAddress" data-address="{{item}}">
+      <view class="title">{{item.title}}</view>
+      <view class="address">{{item.address}}</view>
+    </view>
+  </view>
+</view>

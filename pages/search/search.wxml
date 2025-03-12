@@ -1,0 +1,46 @@
+<view class="container">
+  <view class="search-header">
+    <view class="search-box">
+      <image src="/assets/icons/search.svg" class="search-icon"/>
+      <input class="search-input" 
+             placeholder="搜索商品" 
+             placeholder-class="placeholder" 
+             confirm-type="search"
+             model:value="{{keyword}}"
+             bindinput="onInput"
+             bindconfirm="onSearch"/>
+      <image src="/assets/icons/clean_defalut.svg" 
+             class="clear-icon" 
+             wx:if="{{keyword}}"
+             bindtap="clearKeyword"/>
+    </view>
+  </view>
+
+  <view class="product-list">
+    <view class="product-item" 
+          wx:for="{{productList}}" 
+          wx:key="id">
+      <image class="product-image" src="{{item.image}}" mode="aspectFill"/>
+      <view class="product-info">
+        <view class="product-name">{{item.name}}</view>
+        <view class="product-middle">
+          <view class="price-container">
+            <text class="product-price">¥{{item.price}}</text>
+            <text class="original-price">¥{{item.originalPrice}}</text>
+          </view>
+          <view class="quantity-control">
+            <view class="quantity-btn" bindtap="decreaseQuantity" data-index="{{index}}">-</view>
+            <text class="quantity-number">{{item.quantity}}</text>
+            <view class="quantity-btn" bindtap="increaseQuantity" data-index="{{index}}">+</view>
+          </view>
+        </view>
+        <view class="product-bottom">
+          <view class="action-buttons">
+            <view class="action-btn" bindtap="addToCart" data-index="{{index}}">加入购物车</view>
+            <view class="action-btn primary" bindtap="buyNow" data-index="{{index}}">立即购买</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

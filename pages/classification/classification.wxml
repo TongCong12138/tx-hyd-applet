@@ -1,0 +1,44 @@
+<view class="custom-nav" style="padding-top: {{statusBarHeight}}px;">
+  <view class="nav-bg"></view>
+  <view class="nav-content">
+    <view class="search-entry" bindtap="goToSearch">
+      <image src="/assets/icons/search.svg" class="search-icon"/>
+      <text class="search-text">搜索商品</text>
+    </view>
+  </view>
+</view>
+
+<view class="container" style="margin-top: {{navTotalHeight}}px;">
+  <view class="content">
+    <scroll-view scroll-y class="category-list">
+      <view class="category-item {{currentCategory === index ? 'active' : ''}}" wx:for="{{categories}}" wx:key="id" bindtap="switchCategory" data-index="{{index}}">
+        {{item.name}}
+      </view>
+    </scroll-view>
+    <scroll-view scroll-y class="product-list" bindscroll="onProductListScroll" scroll-with-animation="{{true}}">
+      <view class="product-item" wx:for="{{currentProducts}}" wx:key="id">
+        <image class="product-image" src="{{item.image}}" mode="aspectFill" />
+        <view class="product-info">
+          <view class="product-name">{{item.name}}</view>
+          <view class="product-middle">
+            <view class="price-container">
+              <text class="product-price">¥{{item.price}}</text>
+              <text wx:if="{{item.originalPrice && item.originalPrice > 0}}" class="original-price">¥{{item.originalPrice}}</text>
+            </view>
+            <view class="quantity-control">
+              <view class="quantity-btn" bindtap="decreaseQuantity" data-index="{{index}}">-</view>
+              <text class="quantity-number">{{item.quantity}}</text>
+              <view class="quantity-btn" bindtap="increaseQuantity" data-index="{{index}}">+</view>
+            </view>
+          </view>
+          <view class="product-bottom">
+            <view class="action-buttons">
+              <view class="action-btn" bindtap="addToCart" data-index="{{index}}">加入购物车</view>
+              <view class="action-btn primary" bindtap="buyNow" data-index="{{index}}">立即购买</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

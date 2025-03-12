@@ -1,0 +1,77 @@
+<view class="container">
+  <form bindsubmit="submitForm" style="width: 100%;">
+    <view class="form-group">
+      <view class="form-item">
+        <view class="label">收货人</view>
+        <input name="name" placeholder="请输入收货人姓名" value="{{formData.name}}" />
+      </view>
+
+      <view class="form-item">
+        <view class="label">联系电话</view>
+        <input name="phone" type="number" maxlength="11" placeholder="请输入联系电话" value="{{formData.phone}}" />
+      </view>
+
+      <view class="form-item" bindtap="openRegionPicker">
+        <view class="label">所在地区</view>
+        <view class="region-picker">
+          <text wx:if="{{!formData.region}}">请选择所在地区</text>
+          <text wx:else>{{formData.region}}</text>
+          <text class="arrow">></text>
+        </view>
+      </view>
+
+      <view class="form-item" bindtap="goToSearchAddress">
+        <view class="label">收货地址</view>
+        <view class="region-picker">
+          <text wx:if="{{!formData.address}}">请选择收货地址</text>
+          <text wx:else>{{formData.address}}</text>
+          <text class="arrow">></text>
+        </view>
+      </view>
+
+      <view class="form-item">
+        <view class="label">门牌号</view>
+        <input name="houseNumber" placeholder="例：8幢一单元502室" value="{{formData.houseNumber}}" />
+      </view>
+
+      <view class="form-item">
+        <view class="label">备注</view>
+        <input name="remark" placeholder="例：放家门口，不用来电" value="{{formData.remark}}" />
+      </view>
+
+      <view class="form-item switch-item">
+        <view class="label">设为默认地址</view>
+        <switch name="isDefault" checked="{{formData.isDefault}}" color="#07c160" />
+      </view>
+    </view>
+
+    <view class="btn-area">
+      <button formType="submit" class="submit-btn">保存</button>
+    </view>
+  </form>
+</view>
+<view class="region-mask" wx:if="{{showRegionPicker}}" bindtap="hideRegionPicker"></view>
+<view class="region-picker-popup" wx:if="{{showRegionPicker}}">
+  <view class="region-header">
+    <view class="back" bindtap="handleBack" wx:if="{{currentLevel > 0}}">返回</view>
+    <view class="title">
+      {{currentLevel === 0 ? '选择省份' : 
+        currentLevel === 1 ? '选择城市' : 
+        currentLevel === 2 ? '选择区域' : '选择街道'}}
+    </view>
+    <view class="confirm" bindtap="handleConfirm" wx:if="{{selectedRegion.length === 4}}">确定</view>
+  </view>
+  <view class="selected-path" wx:if="{{selectedRegion.length > 0}}">
+    <text wx:for="{{selectedRegion}}" wx:key="code" class="selected-item">{{item.name}}<text wx:if="{{index !== selectedRegion.length - 1}}" class="separator">></text></text>
+  </view>
+  
+  <view class="region-list">
+    <view class="region-item" 
+          wx:for="{{areaList}}" 
+          wx:key="code" 
+          bindtap="handleAreaSelect" 
+          data-index="{{index}}">
+      {{item.name}}
+    </view>
+  </view>
+</view>

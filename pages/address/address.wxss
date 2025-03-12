@@ -1,0 +1,64 @@
+.address-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.header {
+  background: #fff;
+  padding: 20rpx 30rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.title {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.address-list {
+  padding: 20rpx;
+}
+
+.empty-address {
+  text-align: center;
+  padding: 100rpx 0;
+  color: #999;
+}
+
+.address-item {
+  background: #fff;
+  border-radius: 12rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.user-info {
+  margin-bottom: 10rpx;
+}
+
+.name {
+  font-size: 30rpx;
+  margin-right: 20rpx;
+}
+
+.phone {
+  color: #666;
+}
+
+.address {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx;
+  background: #fff;
+}
+
+.add-btn {
+  background: #07c160;
+  color: #fff;
+}
